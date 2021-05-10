@@ -117,6 +117,15 @@ void PolarBezier(int startX, int startY, int finalX, int finalY, int variance)
 
 ///////////////////////////////////////////////////////
 
+void CreateRotatingEquilateralPolygon(float x, float y, float radius, int vertexCount)
+{
+  pushMatrix();
+  translate(x, y);
+  rotate(frameCount/15.0);
+  polygon(0,0,radius,vertexCount);  // Triangle
+  popMatrix();
+}
+
 void polygon(float x, float y, float radius, int npoints) {
   float angle = TWO_PI / npoints;
   beginShape();
