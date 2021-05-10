@@ -38,6 +38,11 @@ void ApplyNewColor(float3 lowColorBound, float3 highColorBound, float3 multiplie
 
 /////////////////////////////// Beziers //////////////////////////////////////
 
+void LineFromTo(int2 start, int2 end)
+{
+  line(start.x, start.y, end.x, end.y);
+}
+
 void RandomBezier(int lowX, int lowY, int highX, int highY)
 {
   beginShape();
