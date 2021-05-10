@@ -27,17 +27,17 @@ class PointParticle
 
 
 
-void GravityMotionBezier()
+void GravityMotionBezier(PointParticle particle)
 {
   SetupBluePink();
   long currentTime = millis();
   deltaTime = (currentTime - time)*0.05f;
 
-  float2 force = GetTiltDirection(particle1, deltaTime);
+  float2 force = GetTiltDirection(particle, deltaTime);
   
-  particle1.ApplyTotalForceAndUpdatePosition(force);
+  particle.ApplyTotalForceAndUpdatePosition(force);
 
-  CenterConstrainedBezier(center.x, center.y, particle1.position.x, particle1.position.y, 150);
+  CenterConstrainedBezier(center.x, center.y, particle.position.x, particle.position.y, 150);
 
   time = currentTime;
 }
