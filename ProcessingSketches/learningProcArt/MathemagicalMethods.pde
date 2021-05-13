@@ -149,7 +149,7 @@ float rand2dTo1d(float2 value) {
 
 float rand1dTo1d(float value) {
   float mutator = 0.546;
-  float random = frac(sin(value + mutator) * 143758.5453);
+  float random = frac(sin(value + mutator) * 14.53);
   return random;
 }
 

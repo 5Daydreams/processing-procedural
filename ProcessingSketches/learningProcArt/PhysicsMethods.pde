@@ -25,7 +25,17 @@ class PointParticle
   float mass = 0.0f;
 }
 
+class SpringParticle
+{
+  SpringParticle(PointParticle particleInput, float springConstantInput)
+  {
+    particle = particleInput;
+    springConstant = springConstantInput;
+  }
 
+  PointParticle particle;
+  float springConstant;
+}
 
 void GravityMotionBezier(PointParticle particle)
 {
