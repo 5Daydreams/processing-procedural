@@ -4,24 +4,23 @@ float gravityForce = 17;
 
 class PointParticle
 {
-  PointParticle(int2 startPos, float2 startVel, float massValue)
+  PointParticle(PVector startPos, PVector startVel, float massValue)
   {
     position = startPos;
     velocity = startVel;
     mass = massValue;
   }
 
-  void ApplyTotalForceAndUpdatePosition(float2 force)
+  void ApplyTotalForceAndUpdatePosition(PVector force)
   {
-    acceleration = Scale(force,deltaTime/mass);
-    velocity = Add(velocity, acceleration);
-    int2 intVelocity1 = new int2(int(velocity.x), int(velocity.y));
-    position = Add(position, intVelocity1);
+    acceleration = force.mult(deltaTime/mass);
+    velocity.add(acceleration);
+    position.add(velocity);
   }
 
-  int2 position = new int2(0, 0);
-  float2 velocity = new float2(0, 0);
-  float2 acceleration  = new float2(0, 0);
+  PVector position = new PVector(0, 0);
+  PVector velocity = new PVector(0, 0);
+  PVector acceleration  = new PVector(0, 0);
   float mass = 0.0f;
 }
 
@@ -41,9 +40,8 @@ void GravityMotionBezier(PointParticle particle)
 {
   SetupBluePink();
   long currentTime = millis();
-  deltaTime = (currentTime - time)*0.05f;
 
-  float2 force = GetTiltDirection(particle, deltaTime);
+  PVector force = GetTiltDirection(particle, deltaTime);
   
   particle.ApplyTotalForceAndUpdatePosition(force);
 
@@ -52,25 +50,24 @@ void GravityMotionBezier(PointParticle particle)
   time = currentTime;
 }
 
-float2 GetTiltDirection(PointParticle particle, float deltaTime)
+PVector GetTiltDirection(PointParticle particle, float deltaTime)
 {
-  float2 fakeCenter = new float2(center.x, center.y);
-  float2 fakePosition = new float2(particle.position.x, particle.position.y);
-  
-  float2 direction = UseSecondVectorAsOrigin(fakeCenter, fakePosition);
-  float distanceSquared = Size(direction);
-  distanceSquared *= distanceSquared;
-  float2 tiltDirection = new float2( direction.x/ distanceSquared, direction.y/distanceSquared);
+  PVector fakeCenter = new PVector(center.x, center.y);
+  PVector fakePosition = new PVector(particle.position.x, particle.position.y);
+  PVector direction = PVector.sub(fakePosition,fakeCenter);
+  float distanceSquared = direction.magSq();
+  PVector tiltDirection = new PVector( direction.x/ distanceSquared, direction.y/distanceSquared);
 
-  return Scale(tiltDirection, deltaTime * gravityForce);
+  return tiltDirection.mult( deltaTime * gravityForce);
 }
 
 ////////////////////////////////////////////////////
 
-float2 SpringToCenter(int2 vector, float springConstant)
+PVector SpringToCenter(PVector vector, float springConstant)
 {
-  float2 direction = GetFloatVectorByIntSubtraction(center, vector).Normalize();
-  float2 force = Scale(direction, springConstant);
+  PVector direction = PVector.sub(center,vector);
+  direction.normalize();
+  PVector force = direction.mult(springConstant);
 
   return force;
 }

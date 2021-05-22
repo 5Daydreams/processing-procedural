@@ -1,8 +1,6 @@
-int w = 600;
-int h = 600;
-int2 center = new int2(w/2, h/2);
+PVector center = new PVector(width/2, height/2);
 
-int particleNumber = 12;
+int particleNumber = 7;
 SpringParticle[] group = new SpringParticle[particleNumber];
 
 void setup()
@@ -17,11 +15,15 @@ void setup()
   for (int i =0; i < particleNumber; i++)
   {
     group[i] = new SpringParticle(new PointParticle(
-      new int2(int(random(150, 450)), int(random(150, 450))), 
-      new float2(random(-7, 7), random(-7, 7)), 
-      random(1, 5)), 
-      random(40, 70));
+      new PVector(random(50, 550), random(50, 550)), 
+      new PVector(random(-3, 3), random(-3, 3)), 
+      random(1, 3)), 
+      random(4, 7));
   }
+  
+  stroke(255);
+  center.set(width/2, height/2);
+  print(center);
 }
 
 void draw()
@@ -33,7 +35,7 @@ void draw()
   //strokeWeight(1);
   //stroke(random(120, 155), random(55, 100), random(180, 210));
 
-  float2[] forces = new float2[particleNumber];
+  PVector[] forces = new PVector[particleNumber];
 
   for (int i =0; i < particleNumber; i++)
   {
