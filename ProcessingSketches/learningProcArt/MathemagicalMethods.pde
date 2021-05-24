@@ -2,7 +2,7 @@
 
 float frac(float value)
 {
-  return value%1;
+  return value % 1.0f;
 }
 
 PVector sin(PVector vector)
@@ -38,7 +38,7 @@ float rand2dTo1d(PVector value) {
 
 float rand1dTo1d(float value) {
   float mutator = 0.546;
-  float random = frac(sin(value + mutator) * 14.53);
+  float random = frac(sin((value + mutator)) * 143758.5453);
   return random;
 }
 
@@ -116,4 +116,16 @@ float gradientNoise(float value) {
   float nextCellLinePoint = nextCellInclination * (fraction - 1);
 
   return lerp(previousCellLinePoint, nextCellLinePoint, interpolator);
+}
+
+float SmoothRandom1d(float low, float high, float offset)
+{
+  float value = gradientNoise(( millis() + offset)/1000.0f);
+  
+  float delta = high - low;
+  
+  float amplitude = value * delta;
+  
+  return amplitude + low;
+  
 }

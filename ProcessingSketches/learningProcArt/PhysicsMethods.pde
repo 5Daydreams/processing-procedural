@@ -52,9 +52,7 @@ void GravityMotionBezier(PointParticle particle)
 
 PVector GetTiltDirection(PointParticle particle, float deltaTime)
 {
-  PVector fakeCenter = new PVector(center.x, center.y);
-  PVector fakePosition = new PVector(particle.position.x, particle.position.y);
-  PVector direction = PVector.sub(fakePosition,fakeCenter);
+  PVector direction = PVector.sub(particle.position,center);
   float distanceSquared = direction.magSq();
   PVector tiltDirection = new PVector( direction.x/ distanceSquared, direction.y/distanceSquared);
 
@@ -63,9 +61,9 @@ PVector GetTiltDirection(PointParticle particle, float deltaTime)
 
 ////////////////////////////////////////////////////
 
-PVector SpringToCenter(PVector vector, float springConstant)
+PVector SpringToTarget(PVector vector, PVector centerPosition, float springConstant)
 {
-  PVector direction = PVector.sub(center,vector);
+  PVector direction = PVector.sub(centerPosition,vector);
   direction.normalize();
   PVector force = direction.mult(springConstant);
 

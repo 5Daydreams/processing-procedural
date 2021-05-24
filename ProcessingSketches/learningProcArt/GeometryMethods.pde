@@ -43,6 +43,11 @@ void LineFromTo(PVector start, PVector end)
   line(start.x, start.y, end.x, end.y);
 }
 
+void RandomBezier(PVector vec1, PVector vec2)
+{
+  RandomBezier(vec1.x, vec1.y, vec2.x, vec2.y);
+}
+
 void RandomBezier(float lowX, float lowY, float highX, float highY)
 {
   beginShape();
@@ -122,7 +127,7 @@ void PolarBezier(float startX, float startY, float finalX, float finalY, float v
 
 void PolarBezier(PVector start, PVector end, float variance)
 {
-  PolarBezier(start.x,start.y,end.x,end.y,variance);
+  PolarBezier(start.x, start.y, end.x, end.y, variance);
 }
 
 // I should try creating a smoothly-randomized version of PolarBezier
@@ -132,11 +137,11 @@ void SmoothPolarBezier(float startX, float startY, float finalX, float finalY, f
   beginShape();
   vertex(startX, startY); // first point
 
-  float control1X = startX + random(-variance, variance)* rand1dTo1d(millis());
-  float control1Y = startY - random(-variance, variance)* rand1dTo1d(millis());
+  float control1X = startX + variance * (gradientNoise(startX/15.0f) * 2 -1) + variance * (gradientNoise(millis()/310.0f+0.1f)*2 -1.0f);
+  float control1Y = startY - variance * (gradientNoise(startY/15.0f) * 2 -1) + variance * (gradientNoise(millis()/320.0f+0.2f)*2 -1.0f);
 
-  float control2X = finalX - random(-variance, variance)* rand1dTo1d(millis());
-  float control2Y = finalY + random(-variance, variance)* rand1dTo1d(millis());
+  float control2X = finalX - variance * (gradientNoise(finalX/15.0f) * 2 -1) + variance * (gradientNoise(millis()/330.0f+0.3f)*2 -1.0f);
+  float control2Y = finalY + variance * (gradientNoise(finalY/15.0f) * 2 -1) + variance * (gradientNoise(millis()/340.0f+0.4f)*2 -1.0f);
 
   bezierVertex(control1X, control1Y, control2X, control2Y, finalX, finalY);
   endShape();
@@ -144,17 +149,17 @@ void SmoothPolarBezier(float startX, float startY, float finalX, float finalY, f
 
 void SmoothPolarBezier(PVector start, PVector end, float variance)
 {
-  SmoothPolarBezier(start.x,start.y,end.x,end.y,variance);
+  SmoothPolarBezier(start.x, start.y, end.x, end.y, variance);
 }
 
-///////////////////////////////////////////////////////
+//////////////////////////Polygons/////////////////////////////
 
 void CreateRotatingEquilateralPolygon(float x, float y, float radius, int vertexCount)
 {
   pushMatrix();
   translate(x, y);
   rotate(frameCount/15.0);
-  polygon(0,0,radius,vertexCount);  // Triangle
+  polygon(0, 0, radius, vertexCount);  // Triangle
   popMatrix();
 }
 
@@ -167,4 +172,13 @@ void polygon(float x, float y, float radius, int npoints) {
     vertex(sx, sy);
   }
   endShape(CLOSE);
+}
+
+/////////////////////////// Centered Circles /////////////////////////////////////////
+
+void CircleFromTo(PVector v1, PVector v2)
+{
+  PVector midPoint = PVector.add(v1,v2).mult(0.5f);
+  float distance = PVector.sub(v2,v1).mag();
+  circle(midPoint.x,midPoint.y,distance);
 }
