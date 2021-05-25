@@ -1,7 +1,7 @@
-float spacing = 7.0f;
-float noiseDensityX = 12.0f;
-float noiseDensityY = 12.0f;
-float offsetSpeed = 0.5f;
+float spacing = 10.0f;
+float noiseDensityX = 148.123456f;
+float noiseDensityY = 148.123456f;
+float offsetSpeed = 10.5f;
 float pointWeight = 3.0f; // spacing+1;
 
 void setup()
@@ -13,7 +13,7 @@ void setup()
 
 void draw()
 {
-  float offset = millis()/1000.0f;
+  float offset = millis()/10000.0f;
   PVector offsetDir = new PVector(offset,offset,offset);
   offsetDir.mult(offsetSpeed);
 
@@ -26,17 +26,18 @@ void draw()
   {
     for (float y=spacing/2.0f; y <= height; y += spacing)
     {
-      coords.set(x/width*noiseDensityX, y/height*noiseDensityY, y/height*noiseDensityX);
+      coords.set(1.0f*x/width*noiseDensityX, 1.0f*y/height*noiseDensityY, 0);
       // float noise = PerlinNoise3(PVector.add(coords,offsetDir) );
       float noise = PerlinNoise3(PVector.add(coords,offsetDir));
       // float noise = gradientNoise(x * noiseDensityX + offset*y * noiseDensityY);
 
-      // noise = frac(noise * 8);
+      // noise = frac(noise * 3);
 
-      PVector strokeValue = PVector.lerp(color1, color2, noise);
+      PVector strokeValue = PVector.lerp(color1, color2, noise/1.0f);
 
       stroke(strokeValue.x, strokeValue.y, strokeValue.z);
       point(x, y);
     }
   }
 }
+// devlog - there's something fishy going on: every N points there's just a "reset" on the noise values - I wonder if it's a spacing issue?

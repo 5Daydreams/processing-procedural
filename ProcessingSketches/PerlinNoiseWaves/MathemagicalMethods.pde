@@ -23,8 +23,8 @@ PVector frac(PVector vector)
 
 PVector floor(PVector vector)
 {
-  vector.x = 1.0f * floor(vector.x);
-  vector.y = 1.0f * floor(vector.y);
-  vector.z = 1.0f * floor(vector.z);
+  vector.x = floor(vector.x);
+  vector.y = floor(vector.y);
+  vector.z = floor(vector.z);
   return vector;
 }
