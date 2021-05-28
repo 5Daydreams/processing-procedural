@@ -7,7 +7,7 @@
 //get a scalar random value from a 3d value
 float rand3dTo1d(PVector value)
 {
-  PVector dotDir = new PVector(-1.0f*12.9898f, 1.0f*78.233f, -1.0f*37.719f);
+  PVector dotDir = new PVector(12.9898f, 78.233f, 37.719f);
 
   return rand3dTo1d(value, dotDir);
 }
@@ -19,8 +19,8 @@ float rand3dTo1d(PVector value, PVector dotDir)
   //get scalar value from 3d vector
   float random = PVector.dot(smallValue,dotDir);
   //make value more random by making it bigger and then taking the factional part
-  random = frac(sin(1.0f * random) * 143758.5453f);
-  return 1.0f * random;
+  random = frac(sin(random) * 143758.5453f);
+  return random;
 }
 
 
@@ -77,9 +77,9 @@ PVector rand1dTo2d(float value) {
 PVector rand3dTo3d(PVector value) {
   
   PVector randomized = new PVector(
-    rand3dTo1d(value, new PVector(1.0f*12.989, 1.0f*78.233, 1.0f*37.719)), 
-    rand3dTo1d(value, new PVector(1.0f*39.346, 1.0f*11.135, 1.0f*83.155)), 
-    rand3dTo1d(value, new PVector(1.0f*73.156, 1.0f*52.235, 1.0f*19.151))
+    rand3dTo1d(value, new PVector(12.989, 78.233, 37.719)), 
+    rand3dTo1d(value, new PVector(39.346, 11.135, 83.155)), 
+    rand3dTo1d(value, new PVector(73.156, 52.235, 19.151))
     ); 
     // print(randomized + "\n"); // for debugging
   return randomized; 
@@ -164,12 +164,10 @@ float PerlinNoise3(PVector value)
 {
   PVector fraction = frac(value);
 
-  float interpolatorX = 1.0f*easeInOut(fraction.x);
-  float interpolatorY = 1.0f*easeInOut(fraction.y);
-  float interpolatorZ = 1.0f*easeInOut(fraction.z);
+  float interpolatorX = easeInOut(fraction.x);
+  float interpolatorY = easeInOut(fraction.y);
+  float interpolatorZ = easeInOut(fraction.z);
   
-  //print(interpolatorX+"," +interpolatorY+","+ interpolatorZ+"," + "\n");
-
   float[] cellNoiseZ = new float[2];
 
   for (int z=0; z<=1; z++) 
@@ -182,26 +180,17 @@ float PerlinNoise3(PVector value)
 
       for (int x=0; x<=1; x++) 
       {
-        PVector cell = PVector.add(PVector.mult(floor(value),1.001f), new PVector(x*1.0f, y*1.0f, z*1.0f));
-        PVector cellDirection = PVector.add(PVector.mult(rand3dTo3d(cell),2.01f),new PVector(-1.0f,-1.0f,-1.0f));
-        //print("cell dir =" + cellDirection + "\n");
-        PVector compareVector = PVector.sub(fraction, new PVector(x*1.0f, y*1.0f, z*1.0f));
+        PVector cell = PVector.add(floor(value), new PVector(x, y, z));
+        PVector cellDirection = PVector.add(PVector.mult(rand3dTo3d(cell),2.0f),new PVector(-1.0f,-1.0f,-1.0f));
+        PVector compareVector = PVector.sub(fraction, new PVector(x, y, z));
         cellNoiseX[x] = PVector.dot(cellDirection, compareVector);
       }
-      cellNoiseY[y] = lerp(1.0f*cellNoiseX[0], 1.0f*cellNoiseX[1], 1.0f*interpolatorX);
+      cellNoiseY[y] = lerp(cellNoiseX[0], cellNoiseX[1], interpolatorX);
     }
-    cellNoiseZ[z] = lerp(1.0f*cellNoiseY[0], 1.0f*cellNoiseY[1], 1.0f*interpolatorY);
+    cellNoiseZ[z] = lerp( cellNoiseY[0], cellNoiseY[1], interpolatorY);
   }
-  float noise = lerp(1.0f*cellNoiseZ[0], 1.0f*cellNoiseZ[1], 1.0f*interpolatorZ);
-  //print(noise + "\n");
-  return 1.0f*noise;
-  
-  // Something in this function is causing it to "cycle" every N points or so
-  // (!) - Try writing through the loops by hand as opposed to using the "for" expression (a lot of copy pasting)
-  // Also - try using floors and ceils as opposed to the +1 and -1 vectors;
-  
-  
-  
+  float noise = lerp(cellNoiseZ[0], cellNoiseZ[1], interpolatorZ);
+  return noise;  
 }
 
 float GetPerlinWave(PVector offset, float amplitude, float density)

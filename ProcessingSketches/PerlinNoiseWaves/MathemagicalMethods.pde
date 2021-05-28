@@ -7,24 +7,27 @@ float frac(float value)
 
 PVector sin(PVector vector)
 {
-  vector.x = sin(vector.x);
-  vector.y = sin(vector.y);
-  vector.z = sin(vector.z);
-  return vector;
+  PVector temp = new PVector();
+  temp.x = sin(vector.x);
+  temp.y = sin(vector.y);
+  temp.z = sin(vector.z);
+  return temp;
 }
 
 PVector frac(PVector vector)
 {
-  vector.x = frac(vector.x);
-  vector.y = frac(vector.y);
-  vector.z = frac(vector.z);
-  return vector;
+  PVector temp = new PVector();
+  temp.x = frac(vector.x);
+  temp.y = frac(vector.y);
+  temp.z = frac(vector.z);
+  return temp;
 }
 
 PVector floor(PVector vector)
 {
-  vector.x = floor(vector.x);
-  vector.y = floor(vector.y);
-  vector.z = floor(vector.z);
-  return vector;
+  PVector temp = new PVector();
+  temp.x = floor(vector.x);
+  temp.y = floor(vector.y);
+  temp.z = floor(vector.z);
+  return temp;
 }
