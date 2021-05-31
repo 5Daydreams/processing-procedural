@@ -35,8 +35,8 @@ class Branch
   {
     if (parent !=null)
     {
-      strokeWeight(1.0f);
-      stroke(200,128,30);
+      strokeWeight(8.5f);
+      stroke( 255 * (position.x/width), 255 * ( position.y/height ),128*( sin(position.x/128 + position.y/128 + millis()/300.0 )+1 ));
       line(this.position.x, this.position.y, this.parent.position.x, this.parent.position.y);
     }
   }

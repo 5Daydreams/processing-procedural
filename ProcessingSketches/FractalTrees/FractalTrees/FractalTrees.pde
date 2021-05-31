@@ -1,6 +1,6 @@
 Tree tree;
 float maxDist = 50;
-float minDist = 6;
+float minDist = 8;
 boolean start = true;
 
 

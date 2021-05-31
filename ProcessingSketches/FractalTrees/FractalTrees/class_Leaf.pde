@@ -12,7 +12,7 @@ class Leaf
 
   void Show()
   {
-    fill(0,255,0);
+    fill(255);
     noStroke();
 
     ellipse(position.x, position.y, 5, 5);

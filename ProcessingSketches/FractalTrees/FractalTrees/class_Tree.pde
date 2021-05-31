@@ -99,7 +99,7 @@ class Tree
       
       if(branch.count > 0 )
       {
-        branch.direction.div(branch.count);
+        branch.direction.div(branch.count + 1);
         this.branches.add(branch.Next());
       }
       branch.Reset();
