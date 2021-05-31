@@ -1,15 +1,26 @@
 Tree tree;
-float maxDist = 20;
-float minDist = 10;
+float maxDist = 50;
+float minDist = 6;
+boolean start = true;
+
 
 void setup()
 {
-  size(400, 400);
+  size(600, 600);
   tree = new Tree();
-  background(50);
-  tree.Show();
+}
+
+void mousePressed()
+{
+  tree = new Tree();
 }
 
 void draw()
 {
+  if (!start)
+    return;
+
+  background(50);
+  tree.Show();
+  tree.Grow();
 }
