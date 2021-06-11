@@ -2,7 +2,9 @@ PVector x1;
 PVector x2;
 PVector x3;
 
-float time;
+ArrayList<PVector> _pointList;
+
+float frictionFactor;
 
 
 
@@ -25,10 +27,19 @@ void draw()
   circle(1,2,3);
 }
 
-float PullToTarget(PVector position, PVector target)
+PVector PullToTarget(PVector position, PVector target)
 {
   PVector direction = PVector.sub(target, position);
+  return direction;
+}
 
-
-  return direction.mag();
+void UpdatePositions()
+{
+  PVector translateDirection = new PVector();
+  for(int i = 0 ; i < _pointList.size(); i++)
+  {
+    translateDirection
+    _pointList.get(i).add();
+    
+  }
 }
