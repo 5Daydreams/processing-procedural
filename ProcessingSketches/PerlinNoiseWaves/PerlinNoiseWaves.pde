@@ -8,7 +8,7 @@ int waveIterations = 5;
 
 void setup()
 {
-  size(600, 600);
+  size(1200, 800);
   background(20);
 }
 
@@ -19,8 +19,8 @@ void draw()
   offsetDir.mult(offsetSpeed);
   PVector offsetDir2 = offsetDir.mult(5);
   
-  PVector color1 = new PVector(15, 0, 30);
-  PVector color2 = new PVector(0, 230, 0);
+  PVector color1 = new PVector(25, 30, 150);
+  PVector color2 = new PVector(0, 230, 80);
 
   PVector coords = new PVector(2983,7823,0);
   PVector coords2 = new PVector(1175,6234,0);
