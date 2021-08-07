@@ -1,14 +1,15 @@
-float offset = TWO_PI*0.25;
+float offset = TWO_PI*0.1;
 float speed = 4.5;
 float endPointMultiplier = 0.37;
 float curlMultiplier = 0.5;
-float colorOffset = 1500;
+float colorOffset = 800;
+float time = 0;
 
 void setup()
 {
   size(600, 600);
   background(30);
-  strokeWeight(0.2);
+  strokeWeight(0.1);
 }
 
 void draw()
@@ -39,27 +40,37 @@ float cos01(float val)
 void GenerateConcentricCirclesAtDraw()
 {
   translate(width/2.0, height/2.0);
-  float time = millis()/1000.0f;
+  time = millis()/1000.0f;
   time *= speed;
 
-  float xStartValue = 0.1 * cos(time + offset) * width - 0.25 * width;
+  float xStartValue = 0.3 * cos(time + offset) * width;
   float yStartValue = 0.3 * sin(time + offset) * height;
 
   PVector startPos = new PVector(xStartValue, yStartValue);
 
-  float xEndValue = 0.1 * cos(time) * width + 0.25 * width;
-  float yEndValue = 0.3 * sin(time) * height;
+  float xEndValue = (cos(-time/6) * 0.15 + 0.25 * cos(time) ) * width;
+  float yEndValue = (sin(-time/6) * 0.15 + 0.25 * sin(time) ) * height;
 
   PVector endPos = new PVector(xEndValue, yEndValue);
 
-  //float R = 255 * noise(time) * sin01(time + colorOffset);
-  //float G = 255 * noise(time) * sin01(time - colorOffset);
-  //float B = 255 * noise(time) * sin01(time);
+  float R = 255 * (1+noise(time))/2 * sin01(time + colorOffset);
+  float G = 255 * (1+noise(time))/2 * sin01(time - colorOffset);
+  float B = 255 * (1+noise(time))/2 * sin01(time);
 
-  //stroke(R, G, B);
+  stroke(R, G, B);
 
-  stroke(255 * (sin01(curlMultiplier*2*time - TWO_PI*0.3)));
+  //stroke(255 * (sin01(curlMultiplier*2*time - TWO_PI*0.3)*0.6 + 0.2));
   LineFromTo(startPos, endPos);
+}
+
+float SinWave(float amplitude, float waveSpeed, float phase)
+{
+  return amplitude * sin(waveSpeed * time + phase);
+}
+
+float CosWave(float amplitude, float waveSpeed, float phase)
+{
+  return amplitude * cos(waveSpeed * time + phase);
 }
 
 void GenerateShaolinCoinAtDraw()

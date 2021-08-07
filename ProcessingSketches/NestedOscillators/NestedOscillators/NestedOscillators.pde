@@ -38,8 +38,7 @@ void UpdatePositions()
   PVector translateDirection = new PVector();
   for(int i = 0 ; i < _pointList.size(); i++)
   {
-    translateDirection
-    _pointList.get(i).add();
+    // _pointList.get(i).add();
     
   }
 }
