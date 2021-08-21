@@ -1,4 +1,4 @@
-int pixelSize = 20;
+int pixelSize = 15;
 PVector[] directions = new PVector[4];
 
 void setup()
@@ -18,7 +18,7 @@ void setup()
   {
     for (int j = 1; j < height/pixelSize; j ++)
     {
-      if ( (i+j)%(2) == 0)
+      if ( (i+j)%(2) == 1)
       {
         continue;
       }
@@ -26,7 +26,7 @@ void setup()
       float x = i*pixelSize;
       float y = j*pixelSize;
 
-      int kSize = (int)random(2, 4);
+      int kSize = (int)random(2, 5);
       int prevIndexes[] = new int[kSize];
       
       for (int k = 0; k < kSize; k ++)
@@ -42,8 +42,6 @@ void setup()
         
         push();
         translate(x,y);
-        
-        // rotate((random+k) * 6.28318530718/4.0f);
         
         line(0, 0, directions[random].x, directions[random].y);
         
