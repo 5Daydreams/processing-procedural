@@ -12,7 +12,7 @@ void setup()
   size(600, 600);
 
   background(100);
-  strokeWeight(2);
+  strokeWeight(5);
 
   center = new PVector(width/2, height/2);
 }
