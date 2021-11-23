@@ -60,3 +60,8 @@ class MazeTile
     this.Draw(position, size);
   }
 }
+
+class MazeTileStack
+{
+  MazeTile top;
+}
