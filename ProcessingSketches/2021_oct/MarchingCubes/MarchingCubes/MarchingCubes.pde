@@ -1,5 +1,5 @@
 float field[][];
-int resolution = 5;
+int resolution = 20;
 int cols, rows;
 
 float xSeed = 0;
@@ -8,31 +8,43 @@ float zSeed = 0;
 float increment = 0.2;
 
 float zOffset = 0;
-float zPanSpeed = 0.05;
+float zPanSpeed = 0.02;
+
+boolean run = true;
 
 OpenSimplexNoise noiseGen;
 
 void setup()
 {
-  size(400, 400);
+  size(800, 800);
   noiseGen = new OpenSimplexNoise();
 
   cols = 1 + width/resolution;
-  rows = 1 + height/resolution;  
+  rows = 1 + height/resolution;
   field = new float[cols][rows];
-  
-  xSeed = random(-500,500);
-  ySeed = random(-500,500);
-  zSeed = random(-500,500);
-  
+
+  xSeed = random(-500, 500);
+  ySeed = random(-500, 500);
+  zSeed = random(-500, 500);
+
   zOffset = zSeed;
+}
+
+void mousePressed()
+{
+   run = !run; 
 }
 
 void draw()
 {
+  if (!run)
+  {
+    return;
+  }
+
   background(127);
   strokeWeight(resolution * 0.25);
-  
+
   float xOffset = xSeed;
   for (int i = 0; i < cols; i++)
   {
