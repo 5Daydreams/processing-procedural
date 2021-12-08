@@ -1,9 +1,9 @@
-int pixelSize = 15;
+int pixelSize = 20;
 PVector[] directions = new PVector[4];
 
 void setup()
 {
-  size(600, 600);
+  size(1200, 600);
   background(20);
 
   directions[0] = new PVector(pixelSize, 0);
@@ -26,7 +26,7 @@ void setup()
       float x = i*pixelSize;
       float y = j*pixelSize;
 
-      int kSize = (int)random(2, 5);
+      int kSize = (int)random(1, 4);
       int prevIndexes[] = new int[kSize];
       
       for (int k = 0; k < kSize; k ++)
