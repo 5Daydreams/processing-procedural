@@ -1,4 +1,4 @@
-int maxIterations = 5;
+int maxIterationsABA = 5;
 JSONArray rulesABA = new JSONArray();
 
 void GenerateABA()
@@ -11,7 +11,7 @@ void GenerateABA()
 
   int iterationNumber = 0;
 
-  while (iterationNumber < maxIterations)
+  while (iterationNumber < maxIterationsABA)
   {
     print("Iteration " + (iterationNumber + 1) + ": ");
     sentence = GenerateFromTarget(sentence);

@@ -13,8 +13,8 @@ PVector minBorderOffset = new PVector();
 PVector maxBorderOffset = new PVector();
 
 // Bezier Brownian motion
-float bezierPositionOffset = 20.0f;
-float bezierControlOffset = 450.0f;
+float bezierPositionOffset = 150.0f;
+float bezierControlOffset = 100.0f;
 
 // Bezier pair
 BezierVertex bezierA = new BezierVertex();
@@ -37,7 +37,7 @@ void setup()
   // colorMode(RGB, 1.0, 1.0, 1.0);
   size(800, 800);
   background(20);
-  strokeWeight(4.0);
+  strokeWeight(3.0);
 
   minBorderOffset = new PVector(borderOffset, borderOffset);
   maxBorderOffset = new PVector(width - borderOffset, height - borderOffset);
@@ -56,6 +56,8 @@ void draw()
   {
     return;
   }
+  
+  strokeWeight(0.1+5*noise(millis()/500.0f));
 
   currentTime = millis();
 
