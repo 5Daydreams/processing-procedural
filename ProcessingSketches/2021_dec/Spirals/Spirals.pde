@@ -4,24 +4,38 @@ PVector left = new PVector(-1, 0);
 PVector up = new PVector(0, -1);
 PVector down = new PVector(0, 1);
 
-SpiralTrajObject spiralLine;
-SpiralTrajObject[] spirals = new SpiralTrajObject[10];
+int spiralCount = 1000;
+SpiralTrajObject[] spirals;
+PVector SpiralCenter = new PVector();
 
-boolean run = false;
+boolean run = true;
 
 void setup()
 {
   size(500, 500);
 
-  background(50);
+  background(10);
 
-  spiralLine = new SpiralTrajObject(zeroPos, PVector.add(zeroPos, right), -5, -10, 50);
+  SetupSpirals();
+}
+
+void SetupSpirals()
+{
+  spirals = new SpiralTrajObject[spiralCount];
+  SpiralCenter = GetRandomVector(-width*0.4f, width*0.4f, -height*0.4f, height*0.4f);
 
   for (int i = 0; i < spirals.length; i++)
   {
     spirals[i] = RandomizeNewSpiral();
   }
 }
+
+void mousePressed()
+{
+  SetupSpirals();
+  // run = !run;
+}
+
 
 void draw()
 {
@@ -38,10 +52,8 @@ void draw()
 
   noStroke();
 
-  fill(50, 50);
+  fill(10, 10);
   rect(0, 0, width, height);
-
-  // spiralLine.UpdatePositionAndDraw();
 }
 
 PVector GetRandomVector(float xMin, float xMax, float yMin, float yMax)
@@ -51,16 +63,26 @@ PVector GetRandomVector(float xMin, float xMax, float yMin, float yMax)
 
 SpiralTrajObject RandomizeNewSpiral()
 {
-  PVector centerPos = GetRandomVector(-50, 50, -50, 50);
-  PVector offset = GetRandomVector(-1, 1, -1, 1);
-  float radialMulti = random(0.5f, 2.0f);
-  float angularMulti = random(-30.0f, 30.0f);
-  float stepSize = random(1.5f, 10.0f);
+  PVector centerPos = SpiralCenter;
+  PVector offset = GetRandomVector(-10, 10, -10, 10);
+  // float radialMulti = random(0.8f, 1.2f);
+  float radialMulti = (randomGaussian()*0.3f)+ 0.9f;
+  radialMulti *= radialMulti;
+  float angularMulti = random(-2.0f, 0.3f);
+  angularMulti *= angularMulti;
 
-  return new SpiralTrajObject(centerPos, PVector.add(centerPos, offset), radialMulti, angularMulti, stepSize);
-}
+  if (0.0f < angularMulti && angularMulti <= 0.3f)
+  {
+    angularMulti = 0.4f;
+  }
 
-void mousePressed()
-{
-  run = !run;
+  float stepSize = random(1.5f, 4.0f);
+
+  float r = random(0, 190);
+  float g = 170 - r;
+  float b = max(r, g) + 50;
+
+  color newColor = color(r, g, b);
+
+  return new SpiralTrajObject(centerPos, PVector.add(centerPos, offset), radialMulti, angularMulti, stepSize, newColor);
 }

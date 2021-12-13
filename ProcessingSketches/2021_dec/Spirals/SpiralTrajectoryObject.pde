@@ -9,14 +9,16 @@ public class SpiralTrajObject
 
   PVector currentPosition;
   PVector previousPosition;
+  color trailColor;
 
-  SpiralTrajObject(PVector centerPos, PVector startPos, float radial, float angular, float stepSize)
+  SpiralTrajObject(PVector centerPos, PVector startPos, float radial, float angular, float stepSize, color spiralColor)
   {
     centerPosition = centerPos;
     
     radialMultiplier = radial;
     angularMultiplier = angular;
     spiralStepSize = stepSize;
+    trailColor = spiralColor;
     
     currentPosition = startPos;
     previousPosition = new PVector(currentPosition.x,currentPosition.y);
@@ -44,6 +46,9 @@ public class SpiralTrajObject
 
     currentPosition = PVector.add(currentPosition,velocity);
      
+    stroke(trailColor);
+    float thickness = random(0.4f,1.1f);
+    strokeWeight(thickness);
     line(previousPosition.x,previousPosition.y,currentPosition.x,currentPosition.y);
     pop();
   }
