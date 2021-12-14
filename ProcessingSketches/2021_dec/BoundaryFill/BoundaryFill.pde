@@ -10,7 +10,9 @@ void setup()
   
   BoundaryRect bound = new BoundaryRect(-50.0f,50.0f,-100.0f,100.0f);
   
-  PVector one = new PVector(1,-1);
+  PVector dir = new PVector(1,0);
+  float spacing = 10.0f;
   
-  bound.DrawLines(one,5.0f);
+  bound.DrawLines(dir,spacing);
+  bound.DrawLines(dir.rotate(HALF_PI),spacing*2);
 }
