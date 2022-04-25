@@ -2,7 +2,7 @@ PShader shader;
 
 void setup()
 {
-  size(256, 256, P2D);
+  size(512, 512, P2D);
   colorMode(RGB, 1);
   background(0.2f);
 
@@ -14,14 +14,14 @@ void setup()
 
 void draw()
 {
-  shader.set("time", millis()/500.0f);
+  shader.set("time", millis() / 500.0f);
   rect(0, 0, width, height);
-  // print(floor(frameRate) + "\n");
+  //print(floor(frameRate) + "\n");
 }
 
 String digitFix(int old)
 {
-  if (old/10 > 0)
+  if (old / 10 > 0)
   {
     return "" + old;
   } else
@@ -32,7 +32,7 @@ String digitFix(int old)
 
 void keyPressed()
 {
-  if (key == 'S'|| key == 's')
+  if (key == 'S' || key == 's')
   {
     String dateTime = year() + "-";
     dateTime += digitFix(month()) + "-";
