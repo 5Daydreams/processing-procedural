@@ -1,5 +1,5 @@
 PVector zero = new PVector(0, 0);
-float maxSpeed = 1;
+float maxSpeed = 8;
 
 public class Particle
 {
@@ -50,7 +50,7 @@ public class Particle
     int x = floor(currentPosition.x/spacing);
     int y = floor(currentPosition.y/spacing);
     int index = y * collumns + x;
-    PVector force = flowField[index].mult(0.3f);
+    PVector force = flowField[index].mult(0.9f);
 
     ApplyForce(force);
   }
@@ -84,10 +84,10 @@ public class Particle
     float r = red(colour);
     float g = green(colour);
     float b = blue(colour);
-    stroke(r, g, b,255);
-    strokeWeight(0.5f);
+    stroke(r, g, b,235);
+    strokeWeight(0.3f);
 
-    // line(previousPosition.x,previousPosition.y,currentPosition.x,currentPosition.y);
-    point(currentPosition.x, currentPosition.y);
+    line(previousPosition.x,previousPosition.y,currentPosition.x,currentPosition.y);
+    //point(currentPosition.x, currentPosition.y);
   }
 }

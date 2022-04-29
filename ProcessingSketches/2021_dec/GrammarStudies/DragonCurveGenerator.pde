@@ -45,9 +45,10 @@ String IterateDragon(String target)
 void GenerateDragon()
 {
   direction = new PVector(width*sqrt(2)/3, 0);
-  startingPosition = new PVector(width/3, height/3);
+  startingPosition = new PVector(width*1/3, height*1/3);
   push();
   translate(startingPosition.x, startingPosition.y);
+  rotate(radians(0));
 
   Dragon(sentence);
   pop();
@@ -64,7 +65,7 @@ void Dragon(String target)
     if (currentChar.equals("F"))
     {
       float increment = i;
-      stroke(80 + stepPercentage * increment * 150);
+      stroke(100 + stepPercentage * increment * 150);
       line(zero, direction);
       translate(direction.x, direction.y);
     } else if (currentChar.equals("<"))
@@ -78,4 +79,6 @@ void Dragon(String target)
       direction.mult(1.0f/sqrt(2));
     }
   }
+  
+  print("\n Done! \n");
 }

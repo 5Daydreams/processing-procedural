@@ -1,5 +1,6 @@
-float increment = 0.1f;
-float incrementZ = 0.01f;
+float increment = 0.02f;
+float incrementZ = 0.002f;
+
 float spacing = 10.0f;
 int collumns, rows;
 float zOffset = 0.0f;
@@ -13,8 +14,8 @@ boolean run = false;
 
 void setup()
 {
-  size(600, 600);
-  background(00);
+  size(1600, 600);
+  background(20);
 
   collumns = floor(width/spacing)+1;
   rows = floor(height/spacing) +1;
@@ -29,9 +30,12 @@ void setup()
     PVector startVel = new PVector(random(-1, 1), random(-1, 1));
     particles[i] = new Particle(startPos, startVel);
 
-    float r = random(5, 15);
-    float g = random(10, 230);
-    float b = random(80, 190);
+    float r = 20;
+    float g = random(50, 90);
+    float b = random(30, 150);
+
+    //float g = random(120-r, 230-r);
+
     particles[i].SetColor(r, g, b);
   }
 }
@@ -42,11 +46,11 @@ void mousePressed()
 }
 void draw()
 {
-  if(!run)
+  if (!run)
   {
     return;
   }
-  
+
   // fill(10, 10);
   // rect(0, 0, width, height);
 
@@ -58,7 +62,7 @@ void draw()
     for (int x = 0; x < collumns; x++)
     {
       int index = y * collumns + x;
-      float angle = (noise(xOffset, yOffset, zOffset)*2 - 1.0f) * 720;
+      float angle = (noise(xOffset, yOffset, zOffset)*2 - 1.0f) * 2880;
       float r = noise(xOffset, yOffset, zOffset*0.01);
       xOffset += increment;
 

@@ -4,9 +4,9 @@ float endPointMultiplier = 0.37;
 float curlMultiplier = 0.5;
 float colorOffset = 800;
 float time = 0;
-int ringPointCount = 32;
-int cacheSize = 13;
-int ringPointOffset = 4;
+int ringPointCount = 64;
+int cacheSize = 16;
+int ringPointOffset = 5;
 boolean isActive = false;
 
 void setup()
@@ -16,13 +16,14 @@ void setup()
   strokeWeight(0.3);
 }
 
+
+void mousePressed()
+{
+    isActive = !isActive; 
+}
+
 void draw()
 {
-  if (mousePressed)
-  {
-    isActive = !isActive;
-  }
-
   if (!isActive)
   {
     return;
@@ -65,13 +66,13 @@ void GenerateRing()
       float currOffset = (i)%ringPointCount * TWO_PI/(ringPointCount);
       float displacedOffset = ((i+ringPointOffset))%ringPointCount * TWO_PI/(ringPointCount);
 
-      float xStartValue = (sin(time + currOffset)) * width*0.35 * (cos01(time + j * offset) + 0.1f);
-      float yStartValue = (cos(time + currOffset)) * height*0.35 * (cos01(time + j * offset) + 0.1f);
+      float xStartValue = (sin(time + currOffset)) * width*0.25 * (cos01(time + j * offset) + 0.3f);
+      float yStartValue = (cos(time + currOffset)) * height*0.25 * (cos01(time + j * offset) + 0.3f);
 
       PVector startPos = new PVector(xStartValue, yStartValue);
 
-      float xEndValue = (sin(time + displacedOffset)) * width*0.35 * (cos01(time+ (j+1) * offset) + 0.1f);
-      float yEndValue = (cos(time + displacedOffset)) * height*0.35 * (cos01(time+ (j+1) * offset) + 0.1f);
+      float xEndValue = (sin(time + displacedOffset)) * width*0.25 * (cos01(time+ (j+1) * offset) + 0.3f);
+      float yEndValue = (cos(time + displacedOffset)) * height*0.25 * (cos01(time+ (j+1) * offset) + 0.3f);
 
       PVector endPos = new PVector(xEndValue, yEndValue);
 

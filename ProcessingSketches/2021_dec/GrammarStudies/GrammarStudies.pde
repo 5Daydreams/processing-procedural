@@ -10,13 +10,14 @@ void setup()
   stroke(250);
   sentence = axiom;
 
-  int iterationCount = 17;
+  int iterationCount = 15;
 
   while (iterationCount > 0)
   {
     sentence = IterateDragon(sentence);
     iterationCount--;
   }
-
+  
+  
   GenerateDragon();
 }
