@@ -1,5 +1,5 @@
 PVector zero = new PVector(0, 0);
-float maxSpeed = 8;
+float maxSpeed = 6;
 
 public class Particle
 {

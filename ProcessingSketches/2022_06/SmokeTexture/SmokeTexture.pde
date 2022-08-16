@@ -1,11 +1,11 @@
-float increment = 0.02f;
-float incrementZ = 0.002f;
+float increment = 0.1f;
+float incrementZ = 0.1f;
 
 float spacing = 10.0f;
 int collumns, rows;
 float zOffset = 0.0f;
 
-int particleCount = 1500;
+int particleCount = 800;
 
 Particle[] particles;
 PVector[] flowField;
@@ -14,7 +14,7 @@ boolean run = false;
 
 void setup()
 {
-  size(1600, 600);
+  size(512, 512);
   background(20);
 
   collumns = floor(width/spacing)+1;
@@ -30,9 +30,11 @@ void setup()
     PVector startVel = new PVector(random(-1, 1), random(-1, 1));
     particles[i] = new Particle(startPos, startVel);
 
-    float r = 20;
-    float g = random(50, 90);
-    float b = random(30, 150);
+    float white = random(50,250);
+
+    float r = white;
+    float g = white;
+    float b = white;
 
     //float g = random(120-r, 230-r);
 
@@ -43,6 +45,16 @@ void setup()
 void mousePressed()
 {
   run = !run;
+}
+
+void keyPressed() {
+  if (key == CODED) 
+  {
+    if (keyCode == UP) 
+    {
+      save("smokeTex.png");
+    }
+  }
 }
 void draw()
 {
