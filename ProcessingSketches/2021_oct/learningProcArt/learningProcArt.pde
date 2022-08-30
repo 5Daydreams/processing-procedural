@@ -11,7 +11,7 @@ SpringParticle[] group = new SpringParticle[particleNumber];
 
 void setup()
 {
-  size(600, 600);
+  size(800, 800);
   background(20);
   smooth();
   strokeWeight(1);
