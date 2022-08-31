@@ -104,7 +104,7 @@ void DrawTiled(PImage starTexture, float x, float y, float bwValue, float alpha,
 
 void setup()
 {
-  size(1024, 1024, P2D);
+  size(512, 512, P2D);
 
   background(0);
 
@@ -115,9 +115,11 @@ void setup()
   float timeElapsed = millis()/1000.0f;
 
   float startTime = timeElapsed;
+  
+  int darkestCount = 0;
 
   // Darkest Layer (maybe R channel)
-  for (int i = 0; i < 150; i++)
+  for (int i = 0; i < darkestCount; i++)
   {
     float x = random(0, width) * 1.0f;
     float y = random(0, height) * 1.0f;
@@ -132,8 +134,10 @@ void setup()
     print(timeElapsed + "\n");
   }
   
+  int mediumCount = 0;
+  
   // Medium Layer (maybe G channel)
-  for (int i = 0; i < 100; i++)
+  for (int i = 0; i < mediumCount; i++)
   {
     float x = random(0, width) * 1.0f;
     float y = random(0, height) * 1.0f;
@@ -148,15 +152,17 @@ void setup()
     print(timeElapsed + "\n");
   }
 
+  int brightestCount = 450;
+
   // Brightest Layer (maybe B channel)
-  for (int i = 0; i < 70; i++)
+  for (int i = 0; i < brightestCount; i++)
   {
     float x = random(0, width) * 1.0f;
     float y = random(0, height) * 1.0f;
     float bw = random(0.95f, 1.0f);
     float alpha = 1.0f;
     float rotation = random(-PI/4, PI/4);
-    float size = random(0.01f, 0.15f);
+    float size = random(0.02f, 0.07f);
 
     DrawTiled(starTexture, x, y, bw, alpha, rotation, size);
 
