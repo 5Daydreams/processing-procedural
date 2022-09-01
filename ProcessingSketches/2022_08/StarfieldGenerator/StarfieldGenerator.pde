@@ -106,7 +106,7 @@ void setup()
 {
   size(1024, 1024, P2D);
 
-  background(0);
+  background(128);
 
   PImage starTexture = loadImage("starTexBase.png");
 
@@ -117,7 +117,7 @@ void setup()
   float startTime = timeElapsed;
 
   // Darkest Layer (maybe R channel)
-  for (int i = 0; i < 150; i++)
+  for (int i = 0; i < 250; i++)
   {
     float x = random(0, width) * 1.0f;
     float y = random(0, height) * 1.0f;
@@ -133,7 +133,7 @@ void setup()
   }
   
   // Medium Layer (maybe G channel)
-  for (int i = 0; i < 100; i++)
+  for (int i = 0; i < 200; i++)
   {
     float x = random(0, width) * 1.0f;
     float y = random(0, height) * 1.0f;
@@ -149,7 +149,7 @@ void setup()
   }
 
   // Brightest Layer (maybe B channel)
-  for (int i = 0; i < 70; i++)
+  for (int i = 0; i < 120; i++)
   {
     float x = random(0, width) * 1.0f;
     float y = random(0, height) * 1.0f;
@@ -183,5 +183,9 @@ void keyPressed()
     save("starfieldTex_" + thing + ".png");
     print("Texture saved!");
 
+  }
+  else if (key == 'R')
+  {
+     setup(); 
   }
 }
