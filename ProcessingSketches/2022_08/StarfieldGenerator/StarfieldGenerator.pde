@@ -108,7 +108,7 @@ void setup()
 
   background(128);
 
-  PImage starTexture = loadImage("starTexBase.png");
+  PImage starTexture = loadImage("gearBaseW.png");
 
   imageMode(CENTER);
 
@@ -116,7 +116,7 @@ void setup()
 
   float startTime = timeElapsed;
 
-  // Darkest Layer (maybe R channel)
+  // Back Layer (maybe R channel)
   for (int i = 0; i < 250; i++)
   {
     float x = random(0, width) * 1.0f;
@@ -124,68 +124,67 @@ void setup()
     float bw = random(0.4f, 0.7f);
     float alpha = random(0.4f, 0.7f);
     float rotation = random(-PI/4, PI/4);
-    float size = random(0.15f, 0.30f);
+    float size = random(0.15f, 0.20f);
 
     DrawTiled(starTexture, x, y, bw, alpha, rotation, size);
-
-    timeElapsed = millis()/1000.0f;
-    print(timeElapsed + "\n");
   }
-  
-  // Medium Layer (maybe G channel)
-  for (int i = 0; i < 200; i++)
+
+  timeElapsed = millis()/1000.0f;
+  print(timeElapsed + " - finished back layer \n");
+
+
+  // Second Layer (maybe G channel)
+  for (int i = 0; i < 100; i++)
   {
     float x = random(0, width) * 1.0f;
     float y = random(0, height) * 1.0f;
     float bw = random(0.1f, 0.3f);
     float alpha = random(0.5f, 1.0f);
     float rotation = random(-PI/4, PI/4);
-    float size = random(0.05f, 0.25f);
+    float size = random(0.08f, 0.12f);
 
     DrawTiled(starTexture, x, y, bw, alpha, rotation, size);
-
-    timeElapsed = millis()/1000.0f;
-    print(timeElapsed + "\n");
   }
 
-  // Brightest Layer (maybe B channel)
-  for (int i = 0; i < 120; i++)
+  timeElapsed = millis()/1000.0f;
+  print(timeElapsed + " - finished second layer \n");
+
+
+  // Main Layer (maybe B channel)
+  for (int i = 0; i < 160; i++)
   {
     float x = random(0, width) * 1.0f;
     float y = random(0, height) * 1.0f;
     float bw = random(0.95f, 1.0f);
     float alpha = 1.0f;
     float rotation = random(-PI/4, PI/4);
-    float size = random(0.01f, 0.15f);
+    float size = random(0.01f, 0.08f);
 
     DrawTiled(starTexture, x, y, bw, alpha, rotation, size);
-
-    timeElapsed = millis()/1000.0f;
-    print(timeElapsed + "\n");
   }
+  timeElapsed = millis()/1000.0f;
+  print(timeElapsed + " - finished main layer \n");
 
   print("Started at: " + startTime + "\n");
   print("Finished at:" + timeElapsed);
 }
 
-void draw() { 
+void draw() {
   // keep draw() here to continue looping while waiting for keys
 }
 
 void keyPressed()
 {
   if (key == 'S')
-  {    
-    String thing = "";
-    long value = System.currentTimeMillis();
-    thing += value;
-    
-    save("starfieldTex_" + thing + ".png");
-    print("Texture saved!");
-
-  }
-  else if (key == 'R')
   {
-     setup(); 
+    String sysTime = "";
+    long value = System.currentTimeMillis();
+    sysTime += value;
+
+    save("gearTiledTex_" + sysTime + ".png");
+    print("Texture saved!");
+  } else if (key == 'R')
+  {
+    setup();
   }
 }
