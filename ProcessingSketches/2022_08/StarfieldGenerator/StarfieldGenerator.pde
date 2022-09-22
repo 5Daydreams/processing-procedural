@@ -19,11 +19,13 @@ void MakePlusSign()
   rect(0, 0, thickness - inlineThickness, diameter - inlineThickness);
 }
 
+String texName = "ExitArrowBase.png";
+
 void setup()
 {  
   size(1024, 1024, P2D);
 
-  MakeTiledTex();
+  MakeTiledTex(texName);
 }
 
 void draw() {
@@ -38,7 +40,7 @@ void keyPressed()
     long value = System.currentTimeMillis();
     sysTime += value;
 
-    save("GeneratedTextures/PlusTiled_" + sysTime + ".png");
+    save("GeneratedTextures/ExitArrowTiled_" + sysTime + ".png");
     print("Texture saved!");
   } else if (key == 'R')
   {

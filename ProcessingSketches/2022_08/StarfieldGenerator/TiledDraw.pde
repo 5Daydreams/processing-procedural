@@ -100,11 +100,11 @@ void DrawTiled(PImage starTexture, float x, float y, float bwValue, float alpha,
 }
 
 
-void MakeTiledTex()
+void MakeTiledTex(String baseTexName)
 {
   background(0);
 
-  PImage starTexture = loadImage("PlusSignBase.png");
+  PImage starTexture = loadImage(baseTexName);
 
   imageMode(CENTER);
 
@@ -147,14 +147,14 @@ void MakeTiledTex()
 
 
   // Main Layer (maybe B channel)
-  for (int i = 0; i < 20; i++)
+  for (int i = 0; i < 9; i++)
   {
     float x = random(0, width) * 1.0f;
     float y = random(0, height) * 1.0f;
     float bw = random(0.95f, 1.0f);
     float alpha = 1.0f;
-    float rotation = random(0, 0);
-    float size = random(0.10f, 0.15f);
+    float rotation = random(-0.0, 0.0);
+    float size = random(0.15f, 0.35f);
 
     DrawTiled(starTexture, x, y, bw, alpha, rotation, size);
   }
@@ -162,5 +162,5 @@ void MakeTiledTex()
   print(timeElapsed + " - finished main layer \n");
 
   print("Started at: " + startTime + "\n");
-  print("Finished at:" + timeElapsed);
+  print("Finished at: " + timeElapsed);
 }
