@@ -147,14 +147,14 @@ void MakeTiledTex(String baseTexName)
 
 
   // Main Layer (maybe B channel)
-  for (int i = 0; i < 9; i++)
+  for (int i = 0; i < 12; i++)
   {
     float x = random(0, width) * 1.0f;
     float y = random(0, height) * 1.0f;
     float bw = random(0.95f, 1.0f);
     float alpha = 1.0f;
-    float rotation = random(-0.0, 0.0);
-    float size = random(0.15f, 0.35f);
+    float rotation = int(random(-0.0, 4.0)) * PI/2.0 + PI/16.0;
+    float size = random(0.45f, 0.65f);
 
     DrawTiled(starTexture, x, y, bw, alpha, rotation, size);
   }

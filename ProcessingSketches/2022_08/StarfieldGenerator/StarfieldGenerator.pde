@@ -19,7 +19,7 @@ void MakePlusSign()
   rect(0, 0, thickness - inlineThickness, diameter - inlineThickness);
 }
 
-String texName = "ExitArrowBase.png";
+String texName = "PuzzleBase.png";
 
 void setup()
 {  
@@ -40,7 +40,7 @@ void keyPressed()
     long value = System.currentTimeMillis();
     sysTime += value;
 
-    save("GeneratedTextures/ExitArrowTiled_" + sysTime + ".png");
+    save("GeneratedTextures/PuzzleTiled_" + sysTime + ".png");
     print("Texture saved!");
   } else if (key == 'R')
   {
